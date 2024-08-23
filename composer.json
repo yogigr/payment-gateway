@@ -1,0 +1,45 @@
+{
+    "name": "yogigr/payment-gateway",
+    "description": "A simple and versatile Laravel package for integrating multiple payment providers. Easily manage and process payments from various gateways with a unified API.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Yogi Gilang Ramadhan",
+            "email": "yogigilang2nd@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "yogigr\\PaymentGateway\\": "src"
+        },
+        "files": [
+            "src/Helpers/General.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "yogigr\\PaymentGateway\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "yogigr\\PaymentGateway\\PaymentGatewayServiceProvider"
+            ],
+            "aliases": {
+                "PaymentGateway": "yogigr\\PaymentGateway\\Facades\\PaymentGateway"
+            }
+        }
+    },
+    "version": "1.0.0",
+    "require-dev": {
+        "orchestra/testbench": "^8.25",
+        "phpunit/phpunit": "^10.5",
+        "mockery/mockery": "^1.6"
+    },
+    "require": {
+        "duitkupg/duitku-php": "dev-master",
+        "guzzlehttp/guzzle": "^7.2"
+    }
+}

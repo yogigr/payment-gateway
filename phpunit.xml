@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     bootstrap="vendor/autoload.php"
+     backupGlobals="false"
+     colors="true"
+     processIsolation="false"
+     stopOnFailure="false"
+     xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.1/phpunit.xsd"
+     cacheDirectory=".phpunit.cache"
+     backupStaticProperties="false"
+>
+  <coverage/>
+  <testsuites>
+    <testsuite name="Unit">
+      <directory suffix="Test.php">./tests/Unit</directory>
+    </testsuite>
+  </testsuites>
+  <php>
+    <env name="PAYMENT_GATEWAY" value="duitku"/>
+
+        <!-- Common Payment Config -->
+        <env name="PAYMENT_GATEWAY" value="duitku"/>
+        <env name="PAYMENT_CALLBACK_DOMAIN" value="https://your-callback-domain.com"/>
+        <env name="PAYMENT_RETURN_DOMAIN" value="https://your-return-domain.com"/>
+
+        <!-- Duitku Configuration -->
+        <env name="DUITKU_MERCHANT_CODE" value="YOUR_DUITKU_MERCHANT_CODE"/>
+        <env name="DUITKU_MERCHANT_KEY" value="YOUR_DUITKU_MERCHANT_KEY"/>
+        <env name="DUITKU_SANDBOX_MODE" value="true"/>
+        <env name="DUITKU_SANITIZED_MODE" value="false"/>
+        <env name="DUITKU_LOGS" value="false"/>
+        <env name="DUITKU_PAYMENT_URL" value="https://sandbox.duitku.com/api/merchant"/>
+
+        <!-- Finpay Configuration -->
+        <env name="FINPAY_MERCHANT_CODE" value="YOUR_FINPAY_MERCHANT_CODE"/>
+        <env name="FINPAY_MERCHANT_KEY" value="YOUR_FINPAY_MERCHANT_KEY"/>
+        <env name="FINPAY_PAYMENT_URL" value="https://sandbox.finpay.co.id/api/payment"/>
+  </php>
+  <source>
+    <include>
+      <directory suffix=".php">src/</directory>
+    </include>
+  </source>
+</phpunit>
