@@ -48,14 +48,17 @@ class FinpayPg implements PaymentGatewayInterface
         ];
         
         try {
+            $result = new \stdClass();
+            $result->statusCode = '01';
+
             $response = $this->http->post($this->config['payment_url'] . '/pg/payment/card/initiate', $payload);
             $body = json_decode($response->body());
+            $result->statusMessage = $body->responseMessage;
             if ($body->responseCode == '2000000' || $body->responseCode == '4041014') {
-                $result = new \stdClass();
                 $result->statusCode = '00';
                 $result->paymentUrl = $body->redirecturl;
-                return $result;
             }
+            return $result;
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage(), 1);
         }

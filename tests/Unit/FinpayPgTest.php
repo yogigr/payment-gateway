@@ -27,6 +27,7 @@ class FinpayPgTest extends TestCase
         Http::fake([
             'https://finpay.com/api/pg/payment/card/initiate' => Http::response([
                 'responseCode' => '2000000',
+                'responseMessage' => 'success',
                 'redirecturl' => 'https://example.com/payment'
             ], 200)
         ]);
