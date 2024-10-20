@@ -110,10 +110,10 @@ class FinpayPg implements PaymentGatewayInterface
 
             // Melakukan hashing ulang payload
             $generatedSignature = hash_hmac('sha512', json_encode($data), $merchantKey);
-
-            if ($receivedSignature === $generatedSignature && $data['result']['payment']['status'] === 'PAID') {
+    
+            if ($receivedSignature === $generatedSignature && $data['result']['payment']['status']) {
                 $result = [
-                    'resultCode' => '00',
+                    'resultCode' => $data['result']['payment']['status'] == 'PAID' ? '00' : '01',
                     'resultData' => $data,
                     'payment' => [
                         'pg' => 'finpay',
@@ -125,11 +125,10 @@ class FinpayPg implements PaymentGatewayInterface
                         'merchant_code' => $request->input('merchant.id'),
                         'merchant_order_id' => $request->input('order.id'),
                         'publisher_order_id' => $request->input('sourceOfFunds.paymentCode'),
-                        'status' => 'paid'
+                        'status' => strtolower($data['result']['payment']['status'])
                     ]
                 ];
             }
-
             return $result;
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage(), 1);
